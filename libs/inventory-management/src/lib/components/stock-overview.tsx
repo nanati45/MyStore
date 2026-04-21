@@ -51,3 +51,4 @@ export function StockOverview({ items }: StockOverviewProps) {
     </section>
   );
 }
+
