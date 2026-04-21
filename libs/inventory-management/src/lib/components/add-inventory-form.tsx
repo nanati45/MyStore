@@ -66,3 +66,4 @@ export function AddInventoryForm({ onAddItem }: AddInventoryFormProps) {
     </section>
   );
 }
+
