@@ -66,3 +66,4 @@ export function InventorySearchFilter({ items }: InventorySearchFilterProps) {
     </section>
   );
 }
+
