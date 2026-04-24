@@ -32,3 +32,4 @@ export function SupplierList({ suppliers }: SupplierListProps) {
     </section>
   );
 }
+
