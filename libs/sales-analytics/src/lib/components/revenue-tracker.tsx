@@ -50,3 +50,4 @@ export function RevenueTracker({ summaries }: RevenueTrackerProps) {
     </section>
   );
 }
+
