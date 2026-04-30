@@ -32,3 +32,4 @@ export function TopSellingProducts({ products }: TopSellingProductsProps) {
     </section>
   );
 }
+
