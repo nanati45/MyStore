@@ -50,3 +50,4 @@ export function LowStockAlerts({ items }: LowStockAlertsProps) {
     </section>
   );
 }
+
