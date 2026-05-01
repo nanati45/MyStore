@@ -17,3 +17,4 @@ export function MetricCard({ label, value, helperText }: MetricCardProps) {
     </article>
   );
 }
+
