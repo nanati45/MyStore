@@ -26,3 +26,4 @@ export function SalesByCategory({ categories }: SalesByCategoryProps) {
     </section>
   );
 }
+
