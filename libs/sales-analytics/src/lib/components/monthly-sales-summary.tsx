@@ -32,3 +32,4 @@ export function MonthlySalesSummary({ months }: MonthlySalesSummaryProps) {
     </section>
   );
 }
+
