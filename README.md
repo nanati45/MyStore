@@ -1,144 +1,90 @@
-# MyStore Enterprise Monorepo
+# Meridian Commerce: Enterprise Monorepo
 
-MyStore is an Nx React monorepo for an enterprise inventory and sales system. It demonstrates component-based development, shared utilities, and reusable feature packages consumed by separate applications.
+Meridian Commerce  is a component-based enterprise monorepo demonstrating modern front-end architecture. It leverages an Nx workspace to cleanly separate domain logic, reusable UI primitives, and shared utilities across multiple scalable React applications.
 
-## Tech Stack
+## System Architecture
 
-- Nx monorepo
-- React with TypeScript
-- Tailwind CSS for ShadCN-like styling
-- npm workspaces
-- Vite and Vitest
+The architecture follows a strict component-based development methodology, emphasizing separation of concerns and code reusability. The workspace is divided into autonomous feature libraries and consumer applications.
 
-## Monorepo Structure
+### Applications
 
-```text
-mystore-enterprise/
-  apps/
-    warehouse-app/          Inventory management application
-    manager-dashboard/      Sales analytics application
-  libs/
-    ui-components/          Reusable UI component library
-    utils/                  Shared utility functions
-    inventory-management/   Feature system 1 package
-    sales-analytics/        Feature system 2 package
-```
+Thin consumer applications that orchestrate feature libraries into functional tools:
 
-## Package Responsibilities
+- **Warehouse App** (`apps/warehouse-app`): The operational inventory management system. Used by warehouse staff for stock intake, visibility, and supplier management.
+- **Manager Dashboard** (`apps/manager-dashboard`): The executive sales analytics system. Used by management to track revenue trends, monitor low stock, and analyze categorical performance.
 
-### `libs/ui-components`
+### Feature Libraries
 
-Reusable UI components shared across feature systems:
+Domain-specific libraries containing complex business logic and composite features:
 
-- `DataTable` for styled tabular lists
-- `StatusBadge` for green `In Stock` and red `Low Stock` states
-- `PrimaryButton` for consistent form actions
-- `MetricCard` for dashboard KPI summaries
-- `SearchInput` for reusable search/filter controls
-- `SectionHeader` for consistent feature section headings
+- **Inventory Management** (`libs/inventory-management`): Encapsulates all inventory-related state, search filtering, and supplier logic.
+- **Sales Analytics** (`libs/sales-analytics`): Encapsulates sales data visualization, leaderboards, and metric summaries.
 
-### `libs/utils`
+### Core Libraries
 
-Shared utility functions:
+Shared primitives used across all domains:
 
-- `formatCurrency(amount: number)` formats numbers as USD
-- `calculateStockStatus(quantity: number)` returns `OK` when quantity is greater than `10`, otherwise `LOW`
+- **UI Components** (`libs/ui-components`): A highly reusable, framework-agnostic React component library (buttons, tables, badges, metric cards) styled with Tailwind CSS.
+- **Utils** (`libs/utils`): Shared pure functions (e.g., currency formatting, stock status calculation) ensuring consistent business rules across applications.
 
-### `libs/inventory-management`
+## Setup and Installation
 
-This is the first feature system package. It contains:
+Ensure you have Node.js and npm installed.
 
-- `StockOverview`, which composes `DataTable`, `StatusBadge`, and `calculateStockStatus`
-- `AddInventoryForm`, which uses `PrimaryButton` to add new stock items
-- `InventorySearchFilter`, which uses `SearchInput`, `DataTable`, and `calculateStockStatus`
-- `SupplierList`, which uses `SectionHeader` and `DataTable`
-- `ReorderRequests`, which uses `SectionHeader` and `DataTable`
-- `InventoryManagementShell`, which combines both inventory features for `warehouse-app`
+1. **Install dependencies:**
+   ```sh
+   npm install
+   ```
 
-### `libs/sales-analytics`
+2. **Run the Warehouse Application:**
+   ```sh
+   npm run start:warehouse
+   # Runs on http://localhost:4200
+   ```
 
-This is the second feature system package. It contains:
+3. **Run the Manager Dashboard:**
+   ```sh
+   npm run start:manager
+   # Runs on http://localhost:4201
+   ```
 
-- `RevenueTracker`, which uses `formatCurrency` for sales totals
-- `LowStockAlerts`, which uses `calculateStockStatus`, `DataTable`, and `StatusBadge`
-- `TopSellingProducts`, which uses `DataTable` and `formatCurrency`
-- `SalesByCategory`, which uses `MetricCard` and `formatCurrency`
-- `MonthlySalesSummary`, which uses `DataTable` and `formatCurrency`
-- `SalesAnalyticsShell`, which combines both analytics features for `manager-dashboard`
+## Development Commands
 
-## Applications
+- **Build all projects:** `npm run build`
+- **Run all test suites:** `npm test`
+- **Format workspace:** `npm run format`
 
-### `apps/warehouse-app`
+## Feature Ownership & Contributors
 
-Runs the inventory management system. The app is intentionally thin and imports its feature UI from `@mystore-enterprise/inventory-management`.
+This system was developed collaboratively. The core architecture and domain components were implemented and maintained by the following contributors:
 
-### `apps/manager-dashboard`
+### Fasill (fasilhawultie19@gmail.com)
+- **Stock Overview** (`inventory-management`): Comprehensive data table visualizing current inventory items.
+- **Add Inventory Form** (`inventory-management`): Form module for warehouse stock intake with field validation.
+- **Primary Button** (`ui-components`): Standardized primary action primitive used globally.
+- **Inventory Shell** (`inventory-management`): Orchestration shell managing warehouse state and routing.
 
-Runs the sales analytics system. The app is intentionally thin and imports its feature UI from `@mystore-enterprise/sales-analytics`.
+### Nanfii (ifnanfeysal9@gmail.com)
+- **Inventory Search Filter** (`inventory-management`): Real-time search module filtering inventory by SKU and name.
+- **Supplier List** (`inventory-management`): Directory view of partner categories and lead times.
+- **Search Input** (`ui-components`): Accessible, standardized search input primitive.
+- **Status Badge** (`ui-components`): Dynamic visual indicator for stock status states.
 
-## Setup
+### Faysel-Abdella (Fayselcode@gmail.com)
+- **Reorder Requests** (`inventory-management`): Tracking board for pending restock requests and priorities.
+- **Revenue Tracker** (`sales-analytics`): Dynamic metric tracking for aggregated revenue across time periods.
+- **Data Table** (`ui-components`): Generic, highly reusable table component supporting custom column rendering.
+- **Section Header** (`ui-components`): Unified typographical header primitive for feature modules.
 
-Install dependencies:
+### nanati45 (nansiasamnew@gmail.com)
+- **Low Stock Alerts** (`sales-analytics`): Alert component cross-referencing inventory statuses against reorder points.
+- **Top Selling Products** (`sales-analytics`): Performance leaderboard ranking products by unit sales and revenue.
+- **Metric Card** (`ui-components`): KPI display primitive with growth indicator support.
 
-```sh
-npm install
-```
+### AbdulwahidHusein (abdulwahidhussen750@gmail.com)
+- **Sales By Category** (`sales-analytics`): Categorical breakdown module analyzing sales distribution and growth.
+- **Monthly Sales Summary** (`sales-analytics`): Historical progression table detailing month-over-month volume.
+- **Sales Analytics Shell** (`sales-analytics`): Dashboard orchestration component composing all analytics features.
 
-## Run the Applications
-
-Warehouse app:
-
-```sh
-npm run start:warehouse
-```
-
-Open `http://localhost:4200`.
-
-Manager dashboard:
-
-```sh
-npm run start:manager
-```
-
-Open `http://localhost:4201`.
-
-## Build and Test
-
-Build every app and library:
-
-```sh
-npm run build
-```
-
-Run all tests:
-
-```sh
-npm test
-```
-
-Format the workspace:
-
-```sh
-npm run format
-```
-
-## Requirement Mapping
-
-The assignment mentions `feature-x` and `feature-y` as example package names. This project uses clearer domain names instead:
-
-- `feature/system 1` maps to `libs/inventory-management`
-- `feature/system 2` maps to `libs/sales-analytics`
-
-Both feature packages demonstrate composition of shared UI components and shared utility functions.
-
-## Group Feature Count
-
-For a group of 5 members, the requirement is at least 10 features total because each member contributes at least 2 features. This project includes 10 feature components:
-
-| Member Slot | System Package                             | Feature 1               | Feature 2             |
-| ----------- | ------------------------------------------ | ----------------------- | --------------------- |
-| Member 1    | `inventory-management`                     | `StockOverview`         | `AddInventoryForm`    |
-| Member 2    | `inventory-management`                     | `InventorySearchFilter` | `SupplierList`        |
-| Member 3    | `inventory-management` / `sales-analytics` | `ReorderRequests`       | `RevenueTracker`      |
-| Member 4    | `sales-analytics`                          | `LowStockAlerts`        | `TopSellingProducts`  |
-| Member 5    | `sales-analytics`                          | `SalesByCategory`       | `MonthlySalesSummary` |
+---
+*Built with React, Nx, Vite, and Tailwind CSS.*
