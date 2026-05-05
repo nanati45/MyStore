@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/warehouse-app"
+    },
+    {
+      "path": "./libs/ui-components"
+    },
+    {
+      "path": "./libs/utils"
+    },
+    {
+      "path": "./apps/manager-dashboard"
+    },
+    {
+      "path": "./libs/inventory-management"
+    },
+    {
+      "path": "./libs/sales-analytics"
+    }
+  ]
+}
